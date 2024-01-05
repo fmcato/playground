@@ -1,0 +1,22 @@
+version: '3'
+
+services:
+  pihole:
+    container_name: pihole
+    image: pihole/pihole
+    environment:
+      - TZ=Europe/Dublin
+      - WEBPASSWORD=Pihole_admin
+      - SERVERIP=192.168.0.109
+    volumes:
+      - pihole_app:/etc/pihole
+      - dns_config:/etc/dnsmasq.d
+    ports:
+      - "81:80"
+      - "53:53/tcp"
+      - "53:53/udp"
+    restart: unless-stopped
+
+volumes:
+  pihole_app:
+  dns_config:
